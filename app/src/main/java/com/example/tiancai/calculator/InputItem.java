@@ -27,8 +27,13 @@ public class InputItem {
 	}
 	
 	interface InputType {
+		//int类型
 		public static final int INT_TYPE = 0;
+
+		//double类型
 		public static final int DOUBLE_TYPE=1;
+
+		//操作符类型
 		public static final int OPERATOR_TYPE = 2;
 		public static final int ERROR = 3;
 	}

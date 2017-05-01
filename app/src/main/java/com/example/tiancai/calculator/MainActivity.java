@@ -19,29 +19,31 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends Activity implements OnClickListener{
-	private TextView mShowResultTv;
-	private TextView mShowInputTv;
-	private Button mCBtn;
-	private Button mDelBtn;
-	private Button mAddBtn;
-	private Button mSubBtn;
-	private Button mMultiplyBtn;
-	private Button mDividebtn;
-	private Button mZeroButton;
-	private Button mOnebtn;
-	private Button mTwoBtn;
-	private Button mThreeBtn;
-	private Button mFourBtn;
-	private Button mFiveBtn;
-	private Button mSixBtn;
-	private Button mSevenBtn;
-	private Button mEightBtn;
-	private Button mNineBtn;
-	private Button mPointtn;
-	private Button mEqualBtn;
-	private HashMap<View,String> map;
-	private List<InputItem> mInputList;
-	private int mLastInputstatus = INPUT_NUMBER;
+	private TextView mShowResultTv;  //显示计算结果
+	private TextView mShowInputTv;   //显示输入的字符
+	private Button mCBtn;  //清除键
+	private Button mDelBtn;  //后退键
+	private Button mAddBtn;  //加
+	private Button mSubBtn;  //减
+	private Button mMultiplyBtn;   //乘
+	private Button mDividebtn;  //除
+	private Button mZeroButton;  //0
+	private Button mOnebtn;  //1
+	private Button mTwoBtn;  //2
+	private Button mThreeBtn;  //3
+	private Button mFourBtn;  //4
+	private Button mFiveBtn;  //5
+	private Button mSixBtn;  //6
+	private Button mSevenBtn;  //7
+	private Button mEightBtn;  //8
+	private Button mNineBtn;  //9
+	private Button mPointtn;  //点
+	private Button mEqualBtn;  //等于
+
+	private HashMap<View,String> map;  //将View和String映射起来
+	private List<InputItem> mInputList;  //定义记录每次输入的数
+	private int mLastInputstatus = INPUT_NUMBER;  //记录上一次输入状态
+
 	public static final int INPUT_NUMBER = 1; 
 	public static final int INPUT_POINT = 0;
 	public static final int INPUT_OPERATOR = -1;
@@ -57,7 +59,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		public void handleMessage(Message msg) {
 			
 			if(msg.what == SHOW_RESULT_DATA){
-				mShowResultTv.setText(mShowInputTv.getText());
+				mShowResultTv.setText(mShowInputTv.getText());//清除上次运算记录
 				mShowInputTv.setText(mInputList.get(0).getInput());
 				clearScreen(mInputList.get(0));
 			}
@@ -72,6 +74,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		initData(); 
 	}
 
+	//初始化view
 	private void initView() {
 		mShowResultTv = (TextView) this.findViewById(R.id.show_result_tv);
 		mShowInputTv = (TextView)this.findViewById(R.id.show_input_tv);
@@ -93,9 +96,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		mPointtn= (Button)this.findViewById(R.id.point_btn);
 		mEqualBtn= (Button)this.findViewById(R.id.equal_btn);
 		mSubBtn = (Button)this.findViewById(R.id.sub_btn);
-		setOnClickListener();
+		setOnClickListener(); //调用监听事件
 	}
 
+	//初始化数据
 	private void initData() {
 		if(map == null)
 			map = new HashMap<View, String>();
@@ -120,6 +124,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		clearAllScreen();
 	}
 
+	//设置监听事件
 	private void setOnClickListener() {
 		mCBtn.setOnClickListener(this);
 		mDelBtn.setOnClickListener(this);
@@ -142,6 +147,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	}
 
 
+	//点击事件
 	@Override
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
@@ -169,7 +175,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 	}
 
-
+	//点击之后的运算事件
 	private void operator() {
 		if(mLastInputstatus == END ||mLastInputstatus == ERROR || mLastInputstatus == INPUT_OPERATOR|| mInputList.size()==1){
 			return;
@@ -191,6 +197,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		mShowInputTv.startAnimation(anim);
 	}
 
+	//输入点
 	private void inputPoint(View view) {
 		if(mLastInputstatus == INPUT_POINT){
 			return;
@@ -207,6 +214,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		addInputList(INPUT_POINT, key);
 	}
 
+	//输入数字
 	private void inputNumber(View view){
 		if(mLastInputstatus == END || mLastInputstatus == ERROR){
 			clearInputScreen();
@@ -220,6 +228,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		addInputList(INPUT_NUMBER, key);
 	}
 
+	//输入运算符
 	private void inputOperator(View view) {
 		if(mLastInputstatus == INPUT_OPERATOR || mLastInputstatus == ERROR){
 			return;
@@ -238,6 +247,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		addInputList(INPUT_OPERATOR, key);
 	}
 
+	//回退操作
 	private void back() {
 		if(mLastInputstatus == ERROR){
 			clearInputScreen();
@@ -252,13 +262,19 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	//回退InputList操作
 	private void backList() {
 		InputItem item = mInputList.get(mInputList.size() - 1);
         Log.i("wpg","item的值:"+item);
 		if (item.getType() == InputItem.InputType.INT_TYPE) {
+
+			//获取到最后一个item,并去掉最后一个字符
 			String input = item.getInput().substring(0,
 					item.getInput().length() - 1);
             Log.i("wpg","最后一个item,并去掉最后一个字符input的值:"+input);
+
+			//"".equals(input)判断input是否为空,返回TRUE或FALSE
+			//如果截完了，则移除这个item，并将当前状态改为运算操作符
 			if ("".equals(input)) {
 				Log.i("wpg","判断是否截完了? input的值:"+input);
 				mInputList.remove(item);
@@ -266,11 +282,13 @@ public class MainActivity extends Activity implements OnClickListener{
                 mLastInputstatus = INPUT_OPERATOR;
                 Log.i("wpg","mLastInputstatus的值:"+mLastInputstatus);
             } else {
+				//否则设置item为截取完的字符串，并将当前状态改为number
 				item.setInput(input);
 				Log.i("wpg","否则设置item为截取完的字符串，并将当前状态改为number:"+input);
 				mLastInputstatus = INPUT_NUMBER;
 			}
 
+			//如果item是运算操作符 则移除。
 		} else if (item.getType() == InputItem.InputType.OPERATOR_TYPE) {
 			Log.i("wpg","如果item是运算操作符 则移除:"+item);
 			mInputList.remove(item);
@@ -281,6 +299,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				mLastInputstatus = INPUT_POINT;
 			}
 
+			//如果当前item是小数
 		} else {
 			String input = item.getInput().substring(0,
 					item.getInput().length() - 1);
@@ -299,6 +318,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	//清理屏
 	private void clearAllScreen() {
 		
 		clearResultScreen();
@@ -306,11 +326,13 @@ public class MainActivity extends Activity implements OnClickListener{
 		
 	}
 
-
+	//清理结果屏幕
+	//点击mCBtn的时候生效
 	private void clearResultScreen(){
 		mShowResultTv.setText("");
 	}
 
+	//清理输入屏幕
 	private void clearInputScreen() {
 		mShowInputTv.setText(getResources().getString(R.string.zero));
 		mLastInputstatus = INPUT_NUMBER;
@@ -318,6 +340,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		mInputList.add(new InputItem("", InputItem.InputType.INT_TYPE));
 	}
 
+	//计算完成
 	private void clearScreen(InputItem item) {
 		if(mLastInputstatus != ERROR){
 			mLastInputstatus = END;
@@ -325,8 +348,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		mInputList.clear();
 		mInputList.add(item);
 	}
-	
 
+	//实现高级运算
 	public int findHighOperator(int index) {
 		if (mInputList.size() > 1 && index >= 0 && index < mInputList.size())
 			for (int i = index; i < mInputList.size(); i++) {
@@ -468,6 +491,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	}
 
+	//currentStatus 当前状态  9  "9" "+"
 	void addInputList(int currentStatus,String inputChar){
 		switch (currentStatus) {
 		case INPUT_NUMBER:
