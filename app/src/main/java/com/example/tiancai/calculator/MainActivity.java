@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//当程序里面有很多的部件需要点击执行动作的时候可以使用implements OnClickListener
 public class MainActivity extends Activity implements OnClickListener{
+    //private 是私有的只能在当前类里使用
 	private TextView mShowResultTv;  //显示计算结果
 	private TextView mShowInputTv;   //显示输入的字符
 	private Button mCBtn;  //清除键
@@ -42,7 +44,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	private HashMap<View,String> map;  //将View和String映射起来
 	private List<InputItem> mInputList;  //定义记录每次输入的数
-	private int mLastInputstatus = INPUT_NUMBER;  //记录上一次输入状态
+	private int mLastInputstatus = INPUT_NUMBER;  //记录上一次输入的状态
 
 	public static final int INPUT_NUMBER = 1; 
 	public static final int INPUT_POINT = 0;
@@ -52,11 +54,13 @@ public class MainActivity extends Activity implements OnClickListener{
 	public static final int SHOW_RESULT_DATA = 1;
 	public static final String nan = "NaN";
 	public static final String infinite = "∞";
-	
+
+    //在异步线程里面更新UI的时候使用handler
+    //handler是android中为了处理异步线程更新UI的问题而出现的一个工具
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler(){
 
-		public void handleMessage(Message msg) {
+		public void handleMessage(Message msg) {  //覆盖handleMessage方法
 			
 			if(msg.what == SHOW_RESULT_DATA){
 				mShowResultTv.setText(mShowInputTv.getText());//清除上次运算记录
