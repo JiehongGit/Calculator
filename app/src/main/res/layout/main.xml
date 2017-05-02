@@ -15,6 +15,7 @@
         android:padding="12dip"
         android:background="#BFBFBF">
 
+        <!-- center_vertical|right靠右垂直居中 -->
         <TextView
             android:id="@+id/show_result_tv"
             android:layout_width="wrap_content"

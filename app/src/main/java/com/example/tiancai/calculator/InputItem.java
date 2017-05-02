@@ -1,18 +1,21 @@
 package com.example.tiancai.calculator;
 
 public class InputItem {
-	
+	//输入项
 	private String input;
 	private int type;
-	
+
+    //调用父类的构造方法
 	public InputItem() {
 		super();
 	}
+
 	public InputItem(String input, int type) {
 		super();
 		this.input = input;
 		this.type = type;
 	}
+
 	public String getInput() {
 		return input;
 	}
@@ -25,7 +28,8 @@ public class InputItem {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
+
+    //接口
 	interface InputType {
 		//int类型
 		public static final int INT_TYPE = 0;

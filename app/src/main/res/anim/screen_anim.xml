@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!-- 渐变尺寸伸缩动画效果 -->
+    <!--
+      duration  动画持续时间
+      fromXDelta,fromYDelta   起始时X，Y座标
+      pivotX    属性为动画相对于物件的X坐标的开始位置
+      pivotY    属性为动画相对于物件的Y坐标的开始位置
+      toXScale，toYScale  动画最终缩放的倍数， 1.0为正常大小，大于1.0放大
+     -->
     <scale
         android:interpolator="@android:anim/accelerate_interpolator"
         android:duration="300"
@@ -12,12 +20,17 @@
         android:toYScale="0.5" >
     </scale>
 
+    <!-- 画面转换位置移动动画效果 -->
+    <!--
+      duration  动画持续时间
+      fromXDelta,fromYDelta   起始时X，Y座标
+      toXDelta， toYDelta     动画结束时X,Y的座标
+     -->
     <translate
-        android:duration="300"
-        android:fromYDelta="0%"
-        android:fromXDelta="0%"
-         android:toXDelta="25%"
         android:interpolator="@android:anim/accelerate_interpolator"
+        android:duration="300"
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="25%"
         android:toYDelta="-100%" />
-
 </set>

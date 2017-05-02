@@ -1,19 +1,19 @@
 package com.example.tiancai.calculator;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.annotation.SuppressLint;//Lint是一个静态检查器，它围绕Android项目的正确性、安全性、性能、可用性以及可访问性进行分析。它检查的对象包括XML资源、位图、ProGuard配置文件、源文件甚至编译后的字节码。
+import android.app.Activity;  //创建Activity
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.View;
+import android.util.Log;  //打印Log信息
+import android.view.View;  //引用View用到的
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.tiancai.calculator.InputItem.InputType;
-import java.math.BigDecimal;
+import java.math.BigDecimal;  //用于高精度计算
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +71,10 @@ public class MainActivity extends Activity implements OnClickListener{
 	};
 
 	@Override
+	//onCreate方法用来实例化Activity对象
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		super.onCreate(savedInstanceState); //调用父类的方法来实现对界面的绘制
+		setContentView(R.layout.main); //加载布局
 		initView(); 
 		initData(); 
 	}
@@ -108,9 +109,9 @@ public class MainActivity extends Activity implements OnClickListener{
 		if(map == null)
 			map = new HashMap<View, String>();
 		map.put(mAddBtn,getResources().getString(R.string.add));
+		map.put(mSubBtn, getResources().getString(R.string.sub));
 		map.put(mMultiplyBtn,getResources().getString(R.string.multiply));
 		map.put(mDividebtn,getResources().getString(R.string.divide));
-		map.put(mSubBtn, getResources().getString(R.string.sub));
 		map.put(mZeroButton ,getResources().getString(R.string.zero));
 		map.put(mOnebtn,getResources().getString(R.string.one));
 		map.put(mTwoBtn,getResources().getString(R.string.two));
