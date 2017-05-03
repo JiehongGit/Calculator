@@ -52,8 +52,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	public static final int END = -2;
 	public static final int ERROR= -3;
 	public static final int SHOW_RESULT_DATA = 1;
-	public static final String nan = "NaN";
-	public static final String infinite = "∞";
+	public static final String nan = "无解";
+	public static final String infinite = "无解";
 
     //在异步线程里面更新UI的时候使用handler
     //handler是android中为了处理异步线程更新UI的问题而出现的一个工具
@@ -496,7 +496,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	}
 
-	//currentStatus 当前状态  9  "9" "+"
+	//currentStatus 当前状态 
 	void addInputList(int currentStatus,String inputChar){
 		switch (currentStatus) {
 		case INPUT_NUMBER:
