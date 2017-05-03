@@ -42,6 +42,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	private Button mPointtn;  //点
 	private Button mEqualBtn;  //等于
 
+	private Button mFactorial;//阶乘
+
 	private HashMap<View,String> map;  //将View和String映射起来
 	private List<InputItem> mInputList;  //定义记录每次输入的数
 	private int mLastInputstatus = INPUT_NUMBER;  //记录上一次输入的状态
@@ -101,6 +103,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		mPointtn= (Button)this.findViewById(R.id.point_btn);
 		mEqualBtn= (Button)this.findViewById(R.id.equal_btn);
 		mSubBtn = (Button)this.findViewById(R.id.sub_btn);
+
+		mFactorial = (Button)this.findViewById(R.id.factorial_btn);//阶乘
 		setOnClickListener(); //调用监听事件
 	}
 
@@ -124,6 +128,9 @@ public class MainActivity extends Activity implements OnClickListener{
 		map.put(mNineBtn,getResources().getString(R.string.nine));
 		map.put(mPointtn,getResources().getString(R.string.point));
 		map.put(mEqualBtn,getResources().getString(R.string.equal));
+
+		map.put(mFactorial,getResources().getString(R.string.factorial));//阶乘
+
 		mInputList = new ArrayList<InputItem>();
 		mShowResultTv.setText("");
 		clearAllScreen();
@@ -149,6 +156,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		mNineBtn.setOnClickListener(this);
 		mPointtn.setOnClickListener(this);
 		mEqualBtn.setOnClickListener(this);
+
+		mFactorial.setOnClickListener(this);//阶乘
 	}
 
 
@@ -168,6 +177,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		case R.id.equal_btn:
 			operator();
 			break;
+
+		case R.id.factorial_btn:
+			jiecheng();
+			break;
+
 		case R.id.add_btn:
 		case R.id.sub_btn:
 		case R.id.multiply_btn:
@@ -195,12 +209,24 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
 		mHandler.sendMessageDelayed(mHandler.obtainMessage(SHOW_RESULT_DATA), 300);
 	}
-	
+
+	//动画
 	private void startAnim(){
 		mShowInputTv.setText(mShowInputTv.getText()+getResources().getString(R.string.equal));
 		Animation anim = AnimationUtils.loadAnimation(this, R.anim.screen_anim);
 		mShowInputTv.startAnimation(anim);
 	}
+
+	//阶乘
+	private void jiecheng(){
+		int i = 0;
+
+		for (i=1;i<INPUT_NUMBER;i++){
+
+		}
+
+	}
+
 
 	//输入点
 	private void inputPoint(View view) {
@@ -496,7 +522,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	}
 
-	//currentStatus 当前状态 
+	//currentStatus 当前状态
 	void addInputList(int currentStatus,String inputChar){
 		switch (currentStatus) {
 		case INPUT_NUMBER:

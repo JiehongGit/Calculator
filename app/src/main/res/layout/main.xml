@@ -34,7 +34,7 @@
             android:textColor="#1B1D20"
             android:textSize="36sp" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -201,10 +201,16 @@
                             android:layout_weight="1"
                             android:text="@string/zero" />
                         <Button
+                            android:id="@+id/factorial_btn"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="@string/factorial" />
+                        <Button
                             android:id="@+id/point_btn"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:text="@string/point"/>
 
                     </LinearLayout>
