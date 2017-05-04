@@ -217,14 +217,21 @@ public class MainActivity extends Activity implements OnClickListener{
 		mShowInputTv.startAnimation(anim);
 	}
 
-	//阶乘
+	//阶乘功能
 	private void jiecheng(){
-		int i = 0;
-
-		for (i=1;i<INPUT_NUMBER;i++){
-
+		InputItem item = mInputList.get(mInputList.size() - 1);
+		String input = item.getInput();
+		float n = Float.valueOf(input);
+		long num = (long) n;
+		long result = 1;
+		for (long i = 2; i <= num; i++) {
+			result *= i;
 		}
-
+		if (result > Long.MAX_VALUE) {
+			mShowInputTv.setText("数值太大无法计算");
+		} else {
+			mShowResultTv.setText(result + "");
+		}
 	}
 
 
