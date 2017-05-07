@@ -219,21 +219,24 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	//阶乘功能
 	private void jiecheng(){
+        //使用mInputList来保存每次输入的数据
+        //比如输入5，inputItem对象封装数据，保存了你按下的5的string值
 		InputItem item = mInputList.get(mInputList.size() - 1);
 		String input = item.getInput();
-		float n = Float.valueOf(input);
-		long num = (long) n;
-		long result = 1;
-		for (long i = 2; i <= num; i++) {
+        //String转化为double运算
+		double n = Double.valueOf(input);
+		double result = 1;
+		//循环连乘
+		for (double i = 2; i <= n; i++) {
 			result *= i;
 		}
+		//判断条件语句
 		if (result > Long.MAX_VALUE) {
 			mShowInputTv.setText("数值太大无法计算");
 		} else {
 			mShowResultTv.setText(result + "");
 		}
 	}
-
 
 	//输入点
 	private void inputPoint(View view) {
