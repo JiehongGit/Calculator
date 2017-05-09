@@ -83,6 +83,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	//初始化view
 	private void initView() {
+		//实现按钮的获取，通过findViewById方法取得布局文件中声明的文件
 		mShowResultTv = (TextView) this.findViewById(R.id.show_result_tv);
 		mShowInputTv = (TextView)this.findViewById(R.id.show_input_tv);
 		mCBtn = (Button)this.findViewById(R.id.c_btn);
@@ -103,7 +104,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		mPointtn= (Button)this.findViewById(R.id.point_btn);
 		mEqualBtn= (Button)this.findViewById(R.id.equal_btn);
 		mSubBtn = (Button)this.findViewById(R.id.sub_btn);
-
 		mFactorial = (Button)this.findViewById(R.id.factorial_btn);//阶乘
 		setOnClickListener(); //调用监听事件
 	}
@@ -156,7 +156,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		mNineBtn.setOnClickListener(this);
 		mPointtn.setOnClickListener(this);
 		mEqualBtn.setOnClickListener(this);
-
 		mFactorial.setOnClickListener(this);//阶乘
 	}
 
@@ -177,11 +176,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		case R.id.equal_btn:
 			operator();
 			break;
-
+		//阶乘
 		case R.id.factorial_btn:
 			jiecheng();
 			break;
-
+		//加减乘除
 		case R.id.add_btn:
 		case R.id.sub_btn:
 		case R.id.multiply_btn:
@@ -230,12 +229,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		for (double i = 2; i <= n; i++) {
 			result *= i;
 		}
-		//判断条件语句
-		if (result > Long.MAX_VALUE) {
-			mShowInputTv.setText("数值太大无法计算");
-		} else {
-			mShowResultTv.setText(result + "");
-		}
+		mShowResultTv.setText(result + "");
+
 	}
 
 	//输入点
