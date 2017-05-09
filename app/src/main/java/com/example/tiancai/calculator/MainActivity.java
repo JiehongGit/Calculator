@@ -229,8 +229,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		for (double i = 2; i <= n; i++) {
 			result *= i;
 		}
-		mShowResultTv.setText(result + "");
-
+		if (result > Double.MAX_VALUE) {
+			mShowInputTv.setText("数值太大无法计算");
+		} else {
+			mShowResultTv.setText(result + "");
+		}
 	}
 
 	//输入点
