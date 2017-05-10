@@ -46,6 +46,5 @@ public class InputItem {
 	public String toString() {
 		return "InputItem [input=" + input + ", type=" + type + "]";
 	}
-	
 
 }

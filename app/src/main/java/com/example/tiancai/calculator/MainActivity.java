@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			
 			if(msg.what == SHOW_RESULT_DATA){
 				mShowResultTv.setText(mShowInputTv.getText());//清除上次运算记录
-				mShowInputTv.setText(mInputList.get(0).getInput());
+				mShowInputTv.setText(mInputList.get(0).getInput());//保存你输入的数据
 				clearScreen(mInputList.get(0));
 			}
 		}
@@ -223,10 +223,11 @@ public class MainActivity extends Activity implements OnClickListener{
 		InputItem item = mInputList.get(mInputList.size() - 1);
 		String input = item.getInput();
         //String转化为double运算
+        //double型是为了弥补用整型数表示时精度不够的缺陷，占八个字节，提供15~16位有效数字
 		double n = Double.valueOf(input);
 		double result = 1;
 		//循环连乘
-		for (double i = 2; i <= n; i++) {
+		for (int i = 2; i <= n; i++) {
 			result *= i;
 		}
 		if (result > Double.MAX_VALUE) {
